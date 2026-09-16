@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: lacaklokasi-web
+    env: docker
+    region: singapore
+    plan: free
+    dockerCommand: "" # Uses CMD from Dockerfile
+    healthCheckPath: /up
+    envVars:
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        # Uses Render's dynamic hostname
+        sync: false
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: BROADCAST_CONNECTION
+        value: reverb
+      - key: REVERB_APP_ID
+        value: 123456
+      - key: REVERB_APP_KEY
+        value: lacak_reverb_key
+      - key: REVERB_APP_SECRET
+        generateValue: true
+      - key: REVERB_HOST
+        value: 0.0.0.0
+      - key: REVERB_PORT
+        value: 8080
+      - key: REVERB_SCHEME
+        value: http
+      - key: VITE_REVERB_APP_KEY
+        value: lacak_reverb_key
+      - key: VITE_REVERB_HOST
+        # Will be updated to match the Render external URL without protocol
+        value: lacaklokasi.onrender.com
+      - key: VITE_REVERB_PORT
+        value: 443
+      - key: VITE_REVERB_SCHEME
+        value: https
+      - key: SMS_DRIVER
+        value: fonnte
+      - key: FONNTE_TOKEN
+        value: "YOUR_FONNTE_TOKEN_HERE"
